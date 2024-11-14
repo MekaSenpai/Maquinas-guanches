@@ -60,11 +60,39 @@ def menu_principal():
 
 # Función para iniciar una nueva partida
 def nueva_partida():
-    nombre = input("Introduce el nombre de tu personaje: ")
+    nombre = ""
+    font = pygame.font.Font(None, 36)
+    input_active = True  # Variable para saber si el cuadro de texto está activo
+
+    while input_active:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_RETURN:  # Cuando se presiona Enter
+                    input_active = False  # Termina la entrada
+                elif event.key == pygame.K_BACKSPACE:  # Maneja la tecla de retroceso
+                    nombre = nombre[:-1]  # Elimina el último carácter
+                else:
+                    nombre += event.unicode  # Agrega el carácter ingresado
+
+        # Dibuja el fondo y el texto
+        screen.blit(fondo, (0, 0))
+        text_surface = font.render("Introduce el nombre de tu personaje:", True, (0, 0, 0))
+        screen.blit(text_surface, (SCREEN_WIDTH // 2 - text_surface.get_width() // 2, SCREEN_HEIGHT // 2 - 50))
+
+        # Dibuja el nombre ingresado
+        input_surface = font.render(nombre, True, (0, 0, 0))
+        screen.blit(input_surface, (SCREEN_WIDTH // 2 - input_surface.get_width() // 2, SCREEN_HEIGHT // 2))
+
+        pygame.display.flip()
+
     jugador = Personaje(nombre)
     print(f"¡Bienvenido, {jugador.nombre}! Comienza tu aventura.")
     guardar_partida(jugador)
     return jugador
+
 
 # Función para guardar la partida
 def guardar_partida(jugador):
