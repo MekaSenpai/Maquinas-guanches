@@ -189,11 +189,16 @@ def menu_opciones():
                         seleccion_grafica = max(0, seleccion_grafica - 1)
                 elif event.key == pygame.K_RETURN:
                     if seleccion_grafica < len(opciones_graficas):
+                        resolucion = opciones_graficas[seleccion_grafica].split("x")
+                        SCREEN_WIDTH = int(resolucion[0])
+                        SCREEN_HEIGHT = int(resolucion[1])
+                        screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))  # Cambia la resolución
                         print(f"Resolución cambiada a: {opciones_graficas[seleccion_grafica]}")
-                        # Aquí puedes implementar la lógica para cambiar la resolución
                     else:
+                        # Ajustar el volumen
+                        volumen = 1 - (seleccion_sonido * 0.25)  # Convierte la selección a un valor entre 0 y 1
+                        pygame.mixer.music.set_volume(volumen)
                         print(f"Volumen ajustado a: {opciones_sonido[seleccion_sonido]}")
-                        # Aquí puedes implementar la lógica para ajustar el volumen
                     return  # Regresar al menú principal
 
 # Bucle principal del juego
