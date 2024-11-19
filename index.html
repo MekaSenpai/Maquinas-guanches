@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú Principal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="background">
+	<img src="background.png">
+</div>
+    <div id="logo">
+        <img src="logo.png" alt="El Reto de las Máquinas Guanches">
+    </div>
+    <div id="menu">
+        <button onclick="startNewGame()">Nueva partida</button>
+        <button onclick="openLoadMenu()">Cargar partida</button>
+        <button onclick="openSettings()">Ajustes</button>
+        <button onclick="exitGame()">Salir</button>
+    </div>
+    
+    <div id="loadMenu" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeLoadMenu()">&times;</span>
+            <h2>Selecciona una partida</h2>
+            <div id="slots">
+                <!-- Example slots -->
+                <button onclick="loadGame('slot1.save')">Partida 1</button>
+                <button onclick="loadGame('slot2.save')">Partida 2</button>
+                <button onclick="loadGame('slot3.save')">Partida 3</button>
+                <button onclick="loadGame('slot4.save')">Partida 4</button>
+                <button onclick="loadGame('slot5.save')">Partida 5</button>
+            </div>
+            <button onclick="executeLoad()">Cargar partida</button>
+        </div>
+    </div>
+    
+    <div id="settingsMenu" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeSettingsMenu()">&times;</span>
+            <h2>Ajustes</h2>
+            <div>
+                <label for="volumeControl">Volumen:</label>
+                <input type="range" id="volumeControl" min="0" max="100" value="50" onchange="setVolume(this.value)">
+            </div>
+            <button onclick="toggleFullScreen()">Pantalla completa</button>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
